@@ -40,3 +40,6 @@ else
     echo "You will inflate the stats of the following user: $github_uname"
     echo "Git setup complete ✓"
 fi
+
+echo "Testing one inflator run..."
+../inflator/inflate

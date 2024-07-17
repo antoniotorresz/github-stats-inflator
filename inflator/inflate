@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+file="../work/working_hard.txt"
+date_format="%Y-%m-%d %H:%M:%S"
+validate_file() {
+    if [ ! -f "$file_path" ]; then
+        touch $file
+    fi
+}
+
+commit_and_push() {
+    echo "Leet code at $(date "+$date_format")" >> $file
+    git add $file && git commit -m "Leet code at $(date "+$date_format")"
+    git push
+}
+
+validate_file
+commit_and_push
+
+
