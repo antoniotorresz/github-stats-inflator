@@ -10,7 +10,7 @@ validate_file() {
 }
 
 commit_and_push() {
-    echo "Leet code at $(date "+$date_format")" >> $file
+    echo "Leet code at $(date "+$date_format")" > $file
     git add $file && git commit -m "Leet code at $(date "+$date_format")"
     git push
 }

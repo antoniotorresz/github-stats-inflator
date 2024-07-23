@@ -43,7 +43,19 @@ else
 fi
 
 echo "Testing one inflator run..."
-($INFLATE_PATH 5 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
+echo "Inflate path: $INFLATOR_PATH"
+($INFLATOR_PATH 5 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
 
 echo "Creating cron job..."
+
+
+if ! command -v crontab &> /dev/null
+then
+    echo "cronie is not installed. Please install cronie with your package manager and try again."
+    exit 1
+fi
+
+(crontab -l 2>/dev/null; echo "0 7 * * * $INFLATOR_PATH 5") | crontab -
+
+echo "Cron job created successfully ✓"
 
