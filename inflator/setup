@@ -21,8 +21,7 @@ echo "Creating cron job..."
 if command -v crontab &> /dev/null
 then
     echo "In order to create a cron job, we need to run the cron-creator script as root. Please enter your sudo password."
-    sudo ./cron-creator $CURRENT_USER
-    echo "Cron job created successfully ✓"
+    (sudo ./cron-creator $CURRENT_USER && echo "Cron job created successfully ✓") || { echo "Cron job creation failed. Please check the logs and try again."; exit 1; }
 else
     echo "cronie is not installed. Please install cronie with your package manager and try again."
     exit 1
