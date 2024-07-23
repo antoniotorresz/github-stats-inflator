@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 file="../work/working_hard.txt"
 date_format="%Y-%m-%d %H:%M:%S"
+commits=$1
+
 validate_file() {
     if [ ! -f "$file_path" ]; then
         touch $file
@@ -13,7 +15,15 @@ commit_and_push() {
     git push
 }
 
-validate_file
-commit_and_push
+main() {
+    validate_file
+    local counter=0
+    while [ $counter -lt $commits ]; do
+        commit_and_push
+        counter=$((counter + 1))
+    done
+}
+
+main
 
 

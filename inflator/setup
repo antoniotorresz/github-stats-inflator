@@ -2,6 +2,7 @@
 clear
 
 banner=$(cat ./banner)
+INFLATOR_PATH=$(pwd)/inflate
 echo "$banner"
 
 echo "Welcome to the setup of your github stats inflator!"
@@ -42,4 +43,7 @@ else
 fi
 
 echo "Testing one inflator run..."
-../inflator/inflate
+($INFLATE_PATH 5 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
+
+echo "Creating cron job..."
+
