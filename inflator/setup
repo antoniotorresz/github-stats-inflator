@@ -2,45 +2,14 @@
 clear
 
 banner=$(cat ./banner)
+CURRENT_USER=$USER
 INFLATOR_PATH=$(pwd)/inflate
 echo "$banner"
 
 echo "Welcome to the setup of your github stats inflator!"
 echo "This script will create a cron job to to run the inflator script daily at 7:00 AM as a very efficient programer who wakes up early and starts coding as a rat."
+echo "Your git credentials should be saved in your system to make this work. So please verify."
 echo "Please wait..."
-
-if ! command -v git &> /dev/null
-then
-    echo "Git is not installed. Please install git and try again."
-    exit 1
-else 
-    github_uname=$(git config --global user.name)
-    github_email=$(git config --global user.email)
-    
-    if [ -z "$github_uname" ]
-    then
-        echo "Please set your github username using 'git config --global user.name <username>'"
-        exit 1
-    fi
-    
-    if [ -z "$github_email" ]
-    then
-        echo "Please set your github email using 'git config --global user.email <email>'"
-        exit 1
-    fi
-
-    if [ -z $(git config --global user.password) ] 
-    then
-        echo "Please set your github password using 'git config --global user.password <password>'"
-        exit 1
-    fi
-
-    echo "Saving your credentials in your local machine..."
-    echo "I won't ask for your github credentials, i'm not that kind of rat. :)"
-    git config --global credential.helper store
-    echo "You will inflate the stats of the following user: $github_uname"
-    echo "Git setup complete ✓"
-fi
 
 echo "Testing one inflator run..."
 echo "Inflate path: $INFLATOR_PATH"
@@ -49,13 +18,15 @@ echo "Inflate path: $INFLATOR_PATH"
 echo "Creating cron job..."
 
 
-if ! command -v crontab &> /dev/null
+if command -v crontab &> /dev/null
 then
+    echo "In order to create a cron job, we need to run the cron-creator script as root. Please enter your sudo password."
+    sudo ./cron-creator $CURRENT_USER
+    echo "Cron job created successfully ✓"
+else
     echo "cronie is not installed. Please install cronie with your package manager and try again."
     exit 1
 fi
 
-(crontab -l 2>/dev/null; echo "0 7 * * * $INFLATOR_PATH 5") | crontab -
 
-echo "Cron job created successfully ✓"
 
