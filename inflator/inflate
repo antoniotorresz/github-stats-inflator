@@ -1,7 +1,12 @@
 #!/usr/bin/bash
 file="../work/working_hard.txt"
 date_format="%Y-%m-%d %H:%M:%S"
+
 commits=$1
+
+if [ -z "$commits" ]; then
+    $commits=$(shuf -i 2-16 -n 1)
+fi
 
 validate_file() {
     if [ ! -f "$file_path" ]; then
