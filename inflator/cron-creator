@@ -5,7 +5,7 @@ USER=$1
 INFLATOR_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/inflate"
 
 if [ ! -f "$INFLATOR_PATH" ]; then
-  echo "Error: El archivo $INFLATOR_PATH no existe."
+  echo "Error: The file $INFLATOR_PATH is not available."
   exit 1
 fi
 
