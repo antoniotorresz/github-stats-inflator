@@ -4,21 +4,17 @@ set -euo pipefail
 USER=$1
 INFLATOR_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/inflate"
 
-# Verificar si el archivo inflator existe
 if [ ! -f "$INFLATOR_PATH" ]; then
   echo "Error: El archivo $INFLATOR_PATH no existe."
   exit 1
 fi
 
-# Crear el archivo de configuración de cron
 CRON_FILE="/etc/cron.d/inflator"
 echo "0 7 * * * $USER $INFLATOR_PATH" | sudo tee $CRON_FILE > /dev/null
 
-# Asegurar los permisos correctos
 sudo chmod 644 $CRON_FILE
 sudo chown root:root $CRON_FILE
 
-# Asegurar que el script inflator tenga permisos de ejecución
 sudo chmod +x $INFLATOR_PATH
 
 echo "Cron job created at $CRON_FILE to be executed daily at 7:00 AM."
