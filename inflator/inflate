@@ -1,14 +1,18 @@
 #!/usr/bin/bash
 file="../work/working_hard.txt"
 date_format="%Y-%m-%d %H:%M:%S"
-
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 commits=$1
 
 if [ -z "$commits" ]; then
-    $commits=$(shuf -i 2-16 -n 1)
+    commits=$(shuf -i 2-16 -n 1)
 fi
 
-validate_file() {
+validate_directory() {
+    cd $SCRIPT_DIR
+    echo "working on $(pwd)" >> inflator.log
+    echo "----------------------------------------------------------" >> inflator.log
+    echo "the number of commits is $commits wow! :O" >> inflator.log
     if [ ! -f "$file_path" ]; then
         touch $file
     fi
@@ -16,12 +20,12 @@ validate_file() {
 
 commit_and_push() {
     echo "Leet code at $(date "+$date_format")" > $file
-    git add $file && git commit -m "Leet code at $(date "+$date_format")"
-    git push
+    git add $file && git commit -m "Leet code at $(date "+$date_format")" >> inflator.log
+    git push >> inflator.log
 }
 
 main() {
-    validate_file
+    validate_directory
     local counter=0
     while [ $counter -lt $commits ]; do
         commit_and_push

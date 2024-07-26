@@ -11,9 +11,10 @@ echo "This script will create a cron job to to run the inflator script daily at 
 echo "Your git credentials should be saved in your system to make this work. So please verify."
 echo "Please wait..."
 
+
 echo "Testing one inflator run..."
 echo "Inflate path: $INFLATOR_PATH"
-($INFLATOR_PATH 5 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
+($INFLATOR_PATH 1 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
 
 echo "Creating cron job..."
 
