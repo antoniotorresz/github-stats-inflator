@@ -10,7 +10,6 @@ fi
 
 validate_directory() {
     cd $SCRIPT_DIR
-    echo "working on $(pwd)" >> inflator.log
     echo "----------------------------------------------------------" >> inflator.log
     echo "the number of commits is $commits wow! :O" >> inflator.log
     if [ ! -f "$file_path" ]; then
@@ -19,8 +18,9 @@ validate_directory() {
 }
 
 commit_and_push() {
-    echo "Leet code at $(date "+$date_format")" > $file
-    git add $file && git commit -m "Leet code at $(date "+$date_format")" >> inflator.log
+    content="Leet code at $(date "+$date_format")"
+    echo $content > $file
+    git add $file && git commit -m "Leet code at $content" >> inflator.log
     git push >> inflator.log
 }
 
@@ -31,6 +31,7 @@ main() {
         commit_and_push
         counter=$((counter + 1))
     done
+    echo "Good work! ✓" >> inflator.log
 }
 
 main
