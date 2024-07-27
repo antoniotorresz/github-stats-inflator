@@ -20,7 +20,7 @@ validate_directory() {
 commit_and_push() {
     content="Leet code at $(date "+$date_format")"
     echo $content > $file
-    git add $file && git commit -m "Leet code at $content" >> inflator.log
+    git add $file && git commit -m "$content" >> inflator.log
     git push >> inflator.log
 }
 
