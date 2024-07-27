@@ -11,7 +11,7 @@ fi
 validate_directory() {
     cd $SCRIPT_DIR
     echo "----------------------------------------------------------" >> inflator.log
-    echo "the number of commits is $commits wow! :O" >> inflator.log
+    echo "The number of commits is $commits wow! :O" >> inflator.log
     if [ ! -f "$file_path" ]; then
         touch $file
     fi
