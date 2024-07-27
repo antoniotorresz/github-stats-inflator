@@ -4,29 +4,31 @@ clear
 banner=$(cat ./banner)
 CURRENT_USER=$USER
 INFLATOR_PATH=$(pwd)/inflate
+
 echo "$banner"
+echo "-------------------------------------------------------------"
+echo "| Setup                                                     |"
+echo "-------------------------------------------------------------"
+echo "| Welcome to the setup of your github stats inflator!       |"
+echo "| This script will create a cron job to run the inflator    |"
+echo "| script daily at 7:00 AM as a very efficient programmer    |"
+echo "| who wakes up early and starts coding as a rat.            |"
+echo "| Your git credentials should be saved in your system       |"
+echo "| to make this work. So please verify.                      |"
+echo "-------------------------------------------------------------"
 
-echo "Welcome to the setup of your github stats inflator!"
-echo "This script will create a cron job to to run the inflator script daily at 7:00 AM as a very efficient programer who wakes up early and starts coding as a rat."
-echo "Your git credentials should be saved in your system to make this work. So please verify."
-echo "Please wait..."
-
-
-echo "Testing one inflator run..."
-echo "Inflate path: $INFLATOR_PATH"
-($INFLATOR_PATH 1 && echo "Good work! ✓") || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
+sleep 5
+echo "Writting one commit..."
+$INFLATOR_PATH 1 || { echo "Inflator failed. Please check the logs and try again."; exit 1; }
 
 echo "Creating cron job..."
-
-
 if command -v crontab &> /dev/null
 then
     echo "In order to create a cron job, we need to run the cron-creator script as root. Please enter your sudo password."
-    (sudo ./cron-creator $CURRENT_USER && echo "Cron job created successfully ✓") || { echo "Cron job creation failed. Please check the logs and try again."; exit 1; }
+    sudo ./cron-creator $CURRENT_USER || { echo "Cron job creation failed. Please check the logs and try again."; exit 1; }
 else
     echo "cronie is not installed. Please install cronie with your package manager and try again."
     exit 1
 fi
 
-
-
+echo "Setup completed successfully! ✓"

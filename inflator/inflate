@@ -31,7 +31,7 @@ main() {
         commit_and_push
         counter=$((counter + 1))
     done
-    echo "Good work! ✓" >> inflator.log
+    echo "Good work! ✓ (っ◕‿◕)っ"
 }
 
 main
