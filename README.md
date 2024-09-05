@@ -17,7 +17,7 @@ work/
 ```
 
 - **[`inflator/setup`](./inflator/setup)**: Configuration script that guides the user through the setup process.
-- **[`inflator/inflate`](./inflator/cron-creator)**: Script that creates a cron job to execute the inflator script.
+- **[`inflator/cron-creator`](./inflator/cron-creator)**: Script that creates a cron job to execute the inflator script.
 - **[`inflator/inflate`](./inflator/inflate)**: Main script that performs automatic commits.
 - **[`work/working_hard.txt`](./work/working_hard.txt)**: Text file where automatic commits are logged.
 
